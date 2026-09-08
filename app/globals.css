@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #e9e6de;
+  --surface: #f2f0eb;
+  --surface-strong: #fbfaf7;
+  --ink: #20211f;
+  --muted: #72736f;
+  --line: #d4d0c7;
+  --sidebar: #1b1c1a;
+  --sidebar-line: #30312e;
+  --accent: #2f765d;
+  --accent-soft: #dce9e2;
+  --danger: #a34f45;
+  --warning: #a9793c;
+  --board-dark: #806b52;
+  --board-light: #e5e1d8;
+  color-scheme: light;
+}
+:root.dark {
+  --bg: #151715;
+  --surface: #1d201d;
+  --surface-strong: #252825;
+  --ink: #ebe9e2;
+  --muted: #a4a59f;
+  --line: #393c38;
+  --sidebar: #101110;
+  --sidebar-line: #292b28;
+  --accent: #58a986;
+  --accent-soft: #193b2e;
+  --danger: #df7567;
+  --warning: #d6a75f;
+  --board-dark: #7a664e;
+  --board-light: #d7d3c9;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--ink); font-family: Arial, Helvetica, ui-sans-serif, system-ui, sans-serif; }
+button,input,textarea,select { font: inherit; }
+button { -webkit-tap-highlight-color: transparent; }
+::selection { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+
+.ch-shell { background: var(--bg); color: var(--ink); }
+.ch-canvas { background-color: var(--bg); background-image: linear-gradient(rgba(128,120,105,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(128,120,105,.07) 1px, transparent 1px); background-size: 36px 36px; }
+.ch-surface { background: var(--surface); border: 1px solid var(--line); }
+.ch-panel { background: var(--surface-strong); border: 1px solid var(--line); box-shadow: 5px 6px 0 rgba(25,26,23,.06); }
+.ch-eyebrow { color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: .24em; text-transform: uppercase; }
+.ch-muted { color: var(--muted); }
+.ch-title { letter-spacing: -.045em; color: var(--ink); }
+.ch-btn-primary { background: #20211f; color: #f4f2ed; border: 1px solid #20211f; transition: .18s ease; }
+.ch-btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+.ch-btn-secondary { background: transparent; color: var(--ink); border: 1px solid color-mix(in srgb, var(--ink) 35%, var(--line)); transition: .18s ease; }
+.ch-btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+.ch-rule { border-color: var(--line); }
+.ch-mono { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+
+/* Existing data views: neutralize the old neon visual language without touching behavior. */
+.text-cyan-300, .text-cyan-200, .text-cyan-100, .text-cyan-400, .text-violet-400, .text-violet-300 { color: var(--accent) !important; }
+.bg-cyan-400, .bg-emerald-400 { background-color: var(--accent) !important; color: #fff !important; }
+.border-white\/10, .border-white\/15 { border-color: var(--line) !important; }
+.bg-\[\#080b12\], .bg-\[\#0b0f18\], .bg-\[\#0d1320\], .bg-slate-950 { background-color: var(--surface) !important; }
+.text-white, .text-slate-100, .text-slate-200 { color: var(--ink) !important; }
+.text-slate-400, .text-slate-500, .text-slate-600 { color: var(--muted) !important; }
+.bg-white\/\[\.025\], .bg-white\/\[\.03\], .bg-white\/\[\.04\], .bg-white\/\[\.05\], .bg-white\/\[\.02\] { background-color: color-mix(in srgb, var(--surface-strong) 75%, transparent) !important; }

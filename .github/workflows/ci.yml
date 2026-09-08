@@ -1,0 +1,25 @@
+name: Chesslysis CI
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: npx prisma generate
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: Docker build smoke test
+        run: docker build -t chesslysis-ci .
