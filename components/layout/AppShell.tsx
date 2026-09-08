@@ -20,8 +20,8 @@ const nav = [
 
 export default function AppShell({ username, children }: { username: string; children: ReactNode }) {
   const pathname = usePathname();
-  const [dark, setDark] = useState(false);
-  useEffect(() => { const saved = localStorage.getItem("chesslysis-theme"); const enabled = saved === "dark"; setDark(enabled); document.documentElement.classList.toggle("dark", enabled); }, []);
+  const [dark, setDark] = useState(true);
+  useEffect(() => { const saved = localStorage.getItem("chesslysis-theme"); const enabled = saved !== "light"; setDark(enabled); document.documentElement.classList.toggle("dark", enabled); }, []);
   const toggle = () => { const next = !dark; setDark(next); localStorage.setItem("chesslysis-theme", next ? "dark" : "light"); document.documentElement.classList.toggle("dark", next); };
   const links: Record<string, string> = {
     dashboard: `/dashboard/${encodeURIComponent(username)}`, insights: `/insights/${encodeURIComponent(username)}`,

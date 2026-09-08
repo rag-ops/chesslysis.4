@@ -25,6 +25,7 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/scripts-start.sh ./scripts-start.sh
 COPY --from=builder /app/worker.js ./worker.js
+COPY --from=builder /app/worker-supervisor.js ./worker-supervisor.js
 RUN chmod +x ./scripts-start.sh
 EXPOSE 10000
 CMD ["./scripts-start.sh"]

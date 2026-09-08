@@ -238,3 +238,23 @@ After deployment, visit `/api/health`. A production-ready instance should report
 - Runtime schema syncing is disabled by default with `RUN_DB_PUSH_ON_STARTUP=false` to prevent a transient Prisma startup failure from killing an otherwise valid deployment. Set it to `true` only when intentionally applying the schema to a new database.
 - `/api/health` exposes Stockfish and worker-heartbeat status for deployment debugging.
 - The startup script emits explicit fatal messages for server readiness, schema sync and worker restarts instead of a bare `Exited with status 1`.
+
+## Release hardening notes
+
+The UI build now uses a real standalone PGN submission path (`POST /api/games/from-pgn`) instead of browser alerts. A submitted PGN is persisted as an isolated `pgn`-platform game, analyzed with Stockfish, and opened in the real Game Review screen.
+
+The CI workflow is also configured to perform a production Docker container smoke test after the typecheck, tests and Next.js build.
+
+## Release hardening update
+
+Production startup now uses a dedicated Node worker supervisor. The web process no longer depends on shell-subshell PID state to restart the analysis worker, and unexpected worker exits are logged and restarted with backoff. CI also smoke-tests the built Docker image by starting the production container and requesting `/api/health`.
+
+## Final build audit notes
+
+Known CI failures addressed in this release:
+- removed the stale recurring-mistakes test import of the deleted demo module
+- replaced the `const accuracy = undefined` game-review value with persisted player accuracy/ACPL data
+- added a real `/api/games/from-pgn` flow so the single-game Analyze screen no longer uses placeholder browser alerts
+- upgraded Next.js to 15.5.25, a patched 15.5 maintenance release
+- CI uses `npm install` because this repository intentionally does not rely on a committed lockfile
+- CI starts the built production Docker image and calls `/api/health` to catch runtime-startup failures before deployment
