@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function NotFound() { return <main className="mx-auto flex min-h-screen max-w-xl items-center px-6"><div><p className="text-sm font-semibold text-slate-500">404</p><h1 className="mt-2 text-3xl font-bold">Page or game not found</h1><p className="mt-3 text-slate-600">The requested Chesslysis resource does not exist or is not available.</p><Link href="/" className="mt-5 inline-block rounded-lg bg-slate-900 px-4 py-2 text-white">Back home</Link></div></main>; }

@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+:root {
+  --bg:#f5f2ec; --surface:#faf8f3; --surface-strong:#fdfaf5; --ink:#1a1917; --muted:#6b6560; --line:#ddd9d0;
+  --sidebar:#1a1917; --sidebar-line:#2d2b28; --accent:#1f7a52; --accent-soft:#e0ece5; --danger:#b25247; --warning:#b17b3f;
+  --board-light:#eeeae1; --board-dark:#806a50; color-scheme:light;
+}
+:root.dark {
+  --bg:#151715; --surface:#1c1f1c; --surface-strong:#232723; --ink:#ece9e1; --muted:#a6a49d; --line:#393c38;
+  --sidebar:#101110; --sidebar-line:#2a2c29; --accent:#56a983; --accent-soft:#193b2e; --danger:#df7567; --warning:#d5a55d;
+  --board-light:#d7d2c7; --board-dark:#755f47; color-scheme:dark;
+}
+*{box-sizing:border-box} html{background:var(--bg)} body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif} button,input,textarea,select{font:inherit}
+.ch-shell{background:var(--bg);color:var(--ink)} .ch-canvas{background-color:var(--bg);background-image:linear-gradient(rgba(128,120,105,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(128,120,105,.07) 1px,transparent 1px);background-size:36px 36px}
+.ch-surface{background:var(--surface);border:1px solid var(--line)} .ch-panel{background:var(--surface-strong);border:1px solid var(--line);box-shadow:5px 6px 0 rgba(25,26,23,.06)}
+.ch-eyebrow{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}.ch-muted{color:var(--muted)}.ch-title{letter-spacing:-.045em}
+.ch-btn-primary{background:var(--ink);color:var(--bg);border:1px solid var(--ink);transition:.18s ease}.ch-btn-primary:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.ch-btn-secondary{background:transparent;color:var(--ink);border:1px solid color-mix(in srgb,var(--ink) 30%,var(--line));transition:.18s ease}.ch-btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.ch-mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+
+
+/* Visual bridge for existing feature clients: preserve data/behavior while bringing legacy
+   dark utility classes into the same warm editorial design system. */
+.bg-slate-950, .bg-\[\#080b12\], .bg-\[\#0b0f18\], .bg-\[\#0d1320\] { background-color: var(--surface) !important; }
+.border-white\/10, .border-white\/15 { border-color: var(--line) !important; }
+.bg-white\/\[\.02\], .bg-white\/\[\.025\], .bg-white\/\[\.03\], .bg-white\/\[\.04\], .bg-white\/\[\.05\] { background-color: color-mix(in srgb, var(--surface-strong) 78%, transparent) !important; }
+.text-slate-400, .text-slate-500, .text-slate-600 { color: var(--muted) !important; }
+.text-cyan-300, .text-cyan-200, .text-violet-400 { color: var(--accent) !important; }
