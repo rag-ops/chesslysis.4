@@ -1,0 +1,43 @@
+name: Chesslysis CI
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: npx prisma generate
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: Docker build smoke test
+        run: docker build -t chesslysis-ci .
+      - name: Production container smoke test
+        run: |
+          docker run -d --rm --name chesslysis-ci-container -p 18080:10000 \
+            -e NODE_ENV=production \
+            -e PORT=10000 \
+            -e HOSTNAME=0.0.0.0 \
+            -e STOCKFISH_PATH=/usr/games/stockfish \
+            -e ANALYSIS_WORKER_ENABLED=false \
+            -e RUN_DB_PUSH_ON_STARTUP=false \
+            -e DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:5432/chesslysis \
+            chesslysis-ci
+          for i in $(seq 1 45); do
+            if curl -fsS http://127.0.0.1:18080/api/health > /tmp/health.json; then break; fi
+            sleep 1
+          done
+          cat /tmp/health.json
+          grep -q '"status":"ok"' /tmp/health.json
+          grep -q '"available":true' /tmp/health.json
+          docker logs chesslysis-ci-container
+          docker stop chesslysis-ci-container
