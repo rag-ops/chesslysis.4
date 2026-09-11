@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root {
+  --bg:#f5f2ec; --surface:#faf8f3; --surface-strong:#fdfaf5; --ink:#1a1917; --muted:#6b6560; --line:#ddd9d0;
+  --sidebar:#1a1917; --sidebar-line:#2d2b28; --accent:#1f7a52; --accent-soft:#e0ece5; --danger:#b25247; --warning:#b17b3f;
+  --board-light:#eeeae1; --board-dark:#806a50; color-scheme:light;
+}
+html.dark {
+  --bg:#151513; --surface:#1d1c19; --surface-strong:#23221f; --ink:#f2eee6; --muted:#aaa39a; --line:#39362f;
+  --sidebar:#10100f; --sidebar-line:#292722; --accent:#72b993; --accent-soft:#203a2d; --danger:#e18a7e; --warning:#d5a15e;
+  --board-light:#d8d0c1; --board-dark:#705d47; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,textarea,select{font:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ch-shell{background:var(--bg);color:var(--ink);min-height:100vh}
+.ch-canvas{background:var(--bg)}
+.ch-surface{background:var(--surface);border:1px solid var(--line)}
+.ch-panel{background:var(--surface-strong);border:1px solid var(--line);box-shadow:5px 6px 0 color-mix(in srgb,var(--ink) 7%,transparent)}
+.ch-card{background:var(--surface-strong);border:1px solid var(--line);box-shadow:5px 6px 0 color-mix(in srgb,var(--ink) 6%,transparent)}
+.ch-page{max-width:1500px;margin:0 auto;padding:28px 24px 56px}
+.ch-page-header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.ch-eyebrow{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+.ch-muted{color:var(--muted)}
+.ch-title{letter-spacing:-.045em}
+.ch-btn-primary{background:var(--ink);color:var(--bg);border:1px solid var(--ink);transition:.18s ease;cursor:pointer}
+.ch-btn-primary:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.ch-btn-secondary{background:transparent;color:var(--ink);border:1px solid color-mix(in srgb,var(--ink) 30%,var(--line));transition:.18s ease;cursor:pointer}
+.ch-btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.ch-mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+
+/* Compatibility bridge: existing feature components keep their behavior and data contracts,
+   while legacy utility tokens resolve into the Chesslysis editorial theme. */
+.bg-slate-950,.bg-slate-900,.bg-\[\#080b12\],.bg-\[\#0b0f18\],.bg-\[\#0d1320\],.bg-\[\#111722\],.bg-\[\#120f16\]{background-color:var(--surface-strong)!important}
+.bg-white\/\[\.02\],.bg-white\/\[\.025\],.bg-white\/\[\.03\],.bg-white\/\[\.04\],.bg-white\/\[\.05\]{background-color:color-mix(in srgb,var(--surface) 84%,transparent)!important}
+.border-white\/5,.border-white\/10,.border-white\/15{border-color:var(--line)!important}
+.text-white,.text-slate-100,.text-slate-200,.text-slate-300{color:var(--ink)!important}
+.text-slate-400,.text-slate-500,.text-slate-600{color:var(--muted)!important}
+.text-cyan-100,.text-cyan-200,.text-cyan-300,.text-cyan-400,.text-violet-300,.text-violet-400,.text-emerald-100,.text-emerald-200,.text-emerald-300{color:var(--accent)!important}
+.text-amber-100,.text-amber-200,.text-amber-300{color:var(--warning)!important}
+.text-rose-100,.text-rose-200,.text-rose-300{color:var(--danger)!important}
+.bg-cyan-400,.bg-cyan-300,.bg-violet-500,.bg-emerald-400{background-color:var(--accent)!important}
+.from-violet-500,.to-violet-500,.from-cyan-400,.to-cyan-500,.from-violet-400,.to-violet-400{--tw-gradient-from:var(--accent)!important;--tw-gradient-to:transparent!important}
+[class*="bg-gradient-"]{background-image:none!important;background-color:var(--surface-strong)!important}
+.ch-shell .rounded-2xl{border-radius:4px}
+.ch-shell [class*="shadow-"]{box-shadow:5px 6px 0 color-mix(in srgb,var(--ink) 7%,transparent)}
+.ch-shell .ring-cyan-400\/30{--tw-ring-color:color-mix(in srgb,var(--accent) 30%,transparent)!important}
+
+@media (max-width:1023px){.ch-page{padding:24px 18px 88px}.ch-page-header{align-items:flex-start;flex-direction:column}}
+@media (max-width:640px){.ch-page{padding:20px 14px 88px}.ch-page-header{gap:16px}.ch-page-header h1{font-size:28px!important}}
+
+/* Page-level editorial polish for data-heavy legacy screens. */
+.ch-shell main:not(.ch-canvas) h1{letter-spacing:-.045em}
+.ch-shell main:not(.ch-canvas)>header:first-child{padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:26px}
+.ch-shell main:not(.ch-canvas) section>h2,.ch-shell main:not(.ch-canvas) article>h2{letter-spacing:-.02em}
+.ch-shell main:not(.ch-canvas) table{border-color:var(--line)}
+.ch-shell main:not(.ch-canvas) input,.ch-shell main:not(.ch-canvas) select,.ch-shell main:not(.ch-canvas) textarea{border-color:var(--line);background:var(--surface);color:var(--ink)}
